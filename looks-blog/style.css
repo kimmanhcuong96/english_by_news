@@ -2029,7 +2029,7 @@ nav.navigation.pagination {
 
 @media screen and (min-width: 1536px) {
 	.container {
-		width: 50%;
+		width: 60%;
 		max-width: 1200px;
 		margin: 0 auto;
 		padding-left: 15px;
@@ -2040,7 +2040,7 @@ nav.navigation.pagination {
 @media screen and (min-width: 1900px) {
 	.container {
 		max-width: 1440px;
-		width: 40%;
+		width: 60%;
 	}
 }
 

@@ -15,8 +15,8 @@ $LEVEL2_TITLE_PART = 'level 2';
 $LEVEL3_TITLE_PART = 'level 3';
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<?php if (strpos(get_permalink(), $LEVEL1_URL_PART) !== false): ?>
+<?php if (strpos(get_permalink(), $LEVEL1_URL_PART) !== false): ?>
+	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 		<div class="post-wrapper clear">
 			<div class="featured-image">
 				<?php looks_blog_post_thumbnail(); ?>
@@ -52,6 +52,5 @@ $LEVEL3_TITLE_PART = 'level 3';
 				</div>
 			</div>
 		</div>
-	<?php endif; ?>
-
-</article><!-- #post-<?php the_ID(); ?> -->
+	</article><!-- #post-<?php the_ID(); ?> -->
+<?php endif; ?>
