@@ -1762,7 +1762,7 @@ nav.navigation.pagination {
 		padding-left: 15px;
 		padding-right: 15px;
 	}
-	
+
 	.column-1 article,
 	.column-1 .widget-column {
 		width: 100%;
@@ -2105,20 +2105,39 @@ nav.navigation.pagination {
 	margin-top: 0.5em;
 }
 
-.list-level a.button-level-1 {
+.list-level a.button-level-1,
+.list-level a.button-level-2,
+.list-level a.button-level-3 {
 	color: #666 !important;
 	text-decoration: none !important;
-	background-color: #ffe4cd !important;
 	padding: 6px 13px !important;
 	border-radius: 5px !important;
+	margin-right: 15px;
+}
+
+.list-level a.button-level-1 {
+	background-color: #ffe4cd !important;
+}
+
+.list-level a.button-level-2 {
+	background-color: #e5e0ff !important;
+}
+
+.list-level a.button-level-3 {
+	background-color: #A5BAED !important;
 }
 
 .list-level a.button-level-1:hover {
-	color: #666 !important;
-	text-decoration: none !important;
 	background-color: #ffdabc !important;
-	padding: 6px 13px !important;
-	border-radius: 5px !important;
+}
+
+.list-level a.button-level-2:hover {
+	background-color: #d9d1ff !important;
+}
+
+.list-level a.button-level-3:hover {
+	color: white !important;
+	background-color: #7b99e5 !important;
 }
 
 @media screen and (max-width: 767px) {

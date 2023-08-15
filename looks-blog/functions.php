@@ -189,7 +189,7 @@ function looks_blog_scripts() {
 add_action( 'wp_enqueue_scripts', 'looks_blog_scripts' );
 
 add_filter( 'excerpt_length', function($length) {
-    return 15;
+    return 33;
 }, PHP_INT_MAX );
 
 /**

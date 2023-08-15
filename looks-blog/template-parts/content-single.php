@@ -7,6 +7,14 @@
  * @package looks-blog
  */
 
+$LEVEL1_URL_PART = '-level-1';
+$LEVEL2_URL_PART = '-level-2';
+$LEVEL3_URL_PART = '-level-3';
+
+$LEVEL1_TITLE_PART = 'level 1';
+$LEVEL2_TITLE_PART = 'level 2';
+$LEVEL3_TITLE_PART = 'level 3';
+
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -18,13 +26,19 @@
 				</footer><!-- .entry-footer -->
 
 				<?php
+				$title = get_the_title(); // Get the post title
+				$modified_title = str_replace("$LEVEL1_TITLE_PART", "", $title);
+				$modified_title = str_replace("$LEVEL2_TITLE_PART", "", $modified_title);
+				$modified_title = str_replace("$LEVEL3_TITLE_PART", "", $modified_title);
 				if (is_singular()):
-					the_title('<h1 class="entry-title">', '</h1>');
+					echo '<h1 class="entry-title">' . $modified_title . '</h1>';
+					// the_title('<h1 class="entry-title">', '</h1>');
 				else:
-					the_title('<h2 class="entry-title"><a href="' . esc_url(get_permalink()) . '" rel="bookmark">', '</a></h2>');
+					echo '<h2 class="entry-title"><a href="' . esc_url(get_permalink()) . '" rel="bookmark">' . $modified_title . '</a></h2>';
+					// the_title('<h2 class="entry-title"><a href="' . esc_url(get_permalink()) . '" rel="bookmark">', '</a></h2>');
 				endif; ?>
 			</header><!-- .entry-header -->
-			
+
 			<div class="entry-meta">
 				<?php //looks_blog_posted_by(); ?>
 				<?php looks_blog_posted_on(); ?>
