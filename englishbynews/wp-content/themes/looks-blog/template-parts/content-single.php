@@ -18,7 +18,7 @@ $LEVEL3_TITLE_PART = '- level 3';
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<div class="post-wrapper">
+	<div class="post-wrapper base-listen">
 		<div class="entry-container">
 			<header class="entry-header">
 				<footer class="entry-footer">

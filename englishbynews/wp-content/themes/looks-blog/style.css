@@ -2154,3 +2154,13 @@ nav.navigation.pagination {
 .comment-list .children {
 	margin-top: 12px !important;
 }
+
+.base-listen .entry-container {
+	background-color: #fff2f2 !important;
+	padding: 25px !important;
+}
+
+#comments {
+	background-color: #fff2f2 !important;
+	padding: 15px;
+}
