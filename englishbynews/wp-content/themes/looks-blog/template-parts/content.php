@@ -10,9 +10,11 @@ $LEVEL1_URL_PART = '-level-1';
 $LEVEL2_URL_PART = '-level-2';
 $LEVEL3_URL_PART = '-level-3';
 
-$LEVEL1_TITLE_PART = 'level 1';
-$LEVEL2_TITLE_PART = 'level 2';
-$LEVEL3_TITLE_PART = 'level 3';
+$LEVEL1_TITLE_PART = '- level 1';
+$LEVEL2_TITLE_PART = '- level 2';
+$LEVEL3_TITLE_PART = '- level 3';
+
+$NUMBER_OF_TAIL_LEVEL = 15;
 ?>
 
 <?php if (strpos(get_permalink(), $LEVEL1_URL_PART) !== false): ?>
@@ -29,10 +31,13 @@ $LEVEL3_TITLE_PART = 'level 3';
 					</footer><!-- .entry-footer -->
 
 					<?php
-					$title = get_the_title(); // Get the post title
-					$modified_title = str_replace("$LEVEL1_TITLE_PART", "", $title);
-					$modified_title = str_replace("$LEVEL2_TITLE_PART", "", $modified_title);
-					$modified_title = str_replace("$LEVEL3_TITLE_PART", "", $modified_title);
+					// $title = get_the_title(); // Get the post title
+					$post_id = get_the_ID(); // Get the current post ID
+					$raw_title = get_post_field('post_title', $post_id);
+					$modified_title = str_ireplace("$LEVEL1_TITLE_PART", "", $raw_title);
+					$modified_title = str_ireplace("$LEVEL2_TITLE_PART", "", $modified_title);
+					$modified_title = str_ireplace("$LEVEL3_TITLE_PART", "", $modified_title);
+					// $modified_title = substr($title, 0, -$NUMBER_OF_TAIL_LEVEL);
 					if (is_singular()):
 						echo '<h1 class="entry-title">' . $modified_title . '</h1>';
 						// the_title('<h1 class="entry-title">', '</h1>');

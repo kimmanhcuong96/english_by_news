@@ -11,9 +11,9 @@ $LEVEL1_URL_PART = '-level-1';
 $LEVEL2_URL_PART = '-level-2';
 $LEVEL3_URL_PART = '-level-3';
 
-$LEVEL1_TITLE_PART = 'level 1';
-$LEVEL2_TITLE_PART = 'level 2';
-$LEVEL3_TITLE_PART = 'level 3';
+$LEVEL1_TITLE_PART = '- level 1';
+$LEVEL2_TITLE_PART = '- level 2';
+$LEVEL3_TITLE_PART = '- level 3';
 
 ?>
 
@@ -26,8 +26,10 @@ $LEVEL3_TITLE_PART = 'level 3';
 				</footer><!-- .entry-footer -->
 
 				<?php
-				$title = get_the_title(); // Get the post title
-				$modified_title = str_replace("$LEVEL1_TITLE_PART", "", $title);
+				// $title = get_the_title(); // Get the post title
+				$post_id = get_the_ID(); // Get the current post ID
+				$raw_title = get_post_field('post_title', $post_id);
+				$modified_title = str_replace("$LEVEL1_TITLE_PART", "", $raw_title);
 				$modified_title = str_replace("$LEVEL2_TITLE_PART", "", $modified_title);
 				$modified_title = str_replace("$LEVEL3_TITLE_PART", "", $modified_title);
 				if (is_singular()):

@@ -627,9 +627,10 @@ input[type="button"]:hover,
 input[type="reset"]:hover,
 input[type="submit"]:hover {
 	color: #fff;
-	background-color: #df2935;
-	border-color: #df2935;
+	background-color: #B1AFFF;
+	border-color: #B1AFFF;
 	text-decoration: none;
+	cursor: pointer;
 }
 
 button:active,
@@ -1274,7 +1275,7 @@ span.posted-on a {
 .reply a:hover,
 .reply a:focus {
 	color: #fff;
-	background-color: #d85726;
+	background-color: #B1AFFF;
 }
 
 /*--------------------------------------------------------------
@@ -1504,7 +1505,7 @@ button.dropdown-toggle.active .fa:before {
 .cat-links a:focus,
 .entry-meta a:hover,
 .entry-meta a:focus {
-	color: #df2935;
+	color: #8EA7E9;
 }
 span.cat-links a:not(:last-child):after {
 	content: "/";
