@@ -685,7 +685,8 @@ textarea:focus {
 	color: #111;
 }
 
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
 	border: 1px solid #8ea7e9; /* Example border color */
 	outline: none; /* Remove default focus outline */
 	box-shadow: 0 0 5px #8ea7e9; /* Example box shadow */
@@ -1422,7 +1423,7 @@ span.posted-on a {
 .menu-toggle:hover,
 .menu-toggle:focus {
 	outline: thin dotted #fff;
-	background-color: #ffaf29;
+	background-color: unset;
 	color: #fff;
 }
 .menu-toggle:hover i,
@@ -1471,7 +1472,9 @@ button.dropdown-toggle.active .fa:before {
 }
 
 .post-wrapper .featured-image {
-	margin-bottom: 0;
+	margin-bottom: 5px;
+	text-align: center;
+	margin-top: 5px;
 }
 .post-wrapper .entry-footer {
 	padding-bottom: 20px;
@@ -1632,11 +1635,11 @@ input.search-field {
 }
 form.search-form button.search-submit,
 form.search-form input.search-submit {
-	height: 45px;
-	line-height: 30px;
+	height: 43px;
+	line-height: 33px;
 	position: absolute;
-	right: 0;
-	top: 0;
+	right: 1px;
+	top: 1px;
 	border: none;
 	width: 80px;
 	padding: 0;
@@ -1746,7 +1749,7 @@ nav.navigation.pagination {
 	.column-4 .widget-column:nth-child(2n + 1),
 	.column-5 .widget-column:nth-child(2n + 1),
 	.column-6 .widget-column:nth-child(2n + 1) {
-		clear: left;
+		/* clear: left; */
 	}
 	.column-2 article:nth-last-child(-n + 2),
 	.column-3 article:nth-last-child(-n + 2),
@@ -1834,13 +1837,13 @@ nav.navigation.pagination {
 	}
 	.archive-blog.column-1 article .post-wrapper .featured-image {
 		position: absolute;
-		top: 0;
+		top: 50%;
 		left: 0;
 		width: 40%;
-		display: table-cell;
-		height: 100%;
+		transform: translateY(-50%);
 		padding: 5px;
-		margin-bottom: 0;
+		margin-bottom: 5px;
+		text-align: center;
 	}
 
 	.archive-blog.column-1 article .post-wrapper .entry-container {
@@ -1908,7 +1911,7 @@ nav.navigation.pagination {
 
 @media screen and (min-width: 1024px) {
 	.container {
-		width: 60%;
+		width: 80%;
 		max-width: 1200px;
 		margin: 0 auto;
 		padding-left: 15px;
@@ -2056,7 +2059,7 @@ nav.navigation.pagination {
 	.main-navigation ul.nav-menu {
 		margin-right: 0;
 		border-top: 1px solid #666;
-		background-color: #000;
+		background-color: #8ea7e9;
 		margin-top: 0;
 		position: absolute;
 		top: 100%;
