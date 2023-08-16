@@ -1966,9 +1966,8 @@ function get_adjacent_post( $in_same_term = false, $excluded_terms = '', $previo
 	 */
 	// just find post with link of level 1
 	$search_string = '-level-1';
-	$where = apply_filters( "get_{$adjacent}_post_where", $wpdb->prepare( "WHERE p.post_date $op %s AND p.post_type = %s $where AND p.post_link LIKE %s", $current_post_date, $post->post_type,  '%' . $search_string . '%' ), $in_same_term, $excluded_terms, $taxonomy, $post );
+	$where = apply_filters( "get_{$adjacent}_post_where", $wpdb->prepare( "WHERE p.post_date $op %s AND p.post_type = %s $where AND p.post_name LIKE %s", $current_post_date, $post->post_type,  '%' . $search_string . '%' ), $in_same_term, $excluded_terms, $taxonomy, $post );
 	// $where = apply_filters( "get_{$adjacent}_post_where", $wpdb->prepare( "WHERE p.post_date $op %s AND p.post_type = %s $where", $current_post_date, $post->post_type ), $in_same_term, $excluded_terms, $taxonomy, $post );
-echo $where;
 	/**
 	 * Filters the ORDER BY clause in the SQL for an adjacent post query.
 	 *
@@ -2325,14 +2324,14 @@ function get_adjacent_post_link( $format, $link, $in_same_term = false, $exclude
 		$post = get_post( get_post()->post_parent );
 	} else {
 		$post = get_adjacent_post( $in_same_term, $excluded_terms, $previous, $taxonomy );
-		echo $previous;
 	}
 
 	if ( ! $post ) {
 		$output = '';
 	} else {
 		$title = $post->post_title;
-
+		$LEVEL1_TITLE_PART = '- level 1';
+		$title = str_replace("$LEVEL1_TITLE_PART", "", $title);
 		if ( empty( $post->post_title ) ) {
 			$title = $previous ? __( 'Previous Post' ) : __( 'Next Post' );
 		}
