@@ -16,12 +16,12 @@ get_header();
 				<?php if ( have_posts() ) : ?>
 
 					<header class="page-header">
-						<h1 class="page-title">
+						<h2 class="page-title" style="text-align: center; font-size: 36px; color: #7286D3;">
 							<?php
 							/* translators: %s: search query. */
-							printf( esc_html__( 'Search Results for: %s', 'looks-blog' ), '<span>' . get_search_query() . '</span>' );
+							printf( esc_html__( 'Search Results for: %s', 'looks-blog' ), '<span style="font-style: italic; font-size: 32px;">' . get_search_query() . '</span>' );
 							?>
-						</h1>
+						</h2>
 					</header><!-- .page-header -->
 
 					<?php

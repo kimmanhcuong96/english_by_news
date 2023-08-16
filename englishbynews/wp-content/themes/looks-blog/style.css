@@ -590,7 +590,7 @@ a {
 a:hover,
 a:focus,
 a:active {
-	color: #df2935;
+	color: #7b99e5;
 }
 
 a:focus {
@@ -660,9 +660,10 @@ input[type="datetime"],
 input[type="datetime-local"],
 input[type="color"],
 textarea {
-	border: 1px solid #262525;
-	background-color: transparent;
+	border: 1px solid gray;
+	/* background-color: transparent; */
 	padding: 12px;
+	border-radius: 6px;
 }
 
 input[type="text"]:focus,
@@ -682,6 +683,12 @@ input[type="datetime-local"]:focus,
 input[type="color"]:focus,
 textarea:focus {
 	color: #111;
+}
+
+input:focus, textarea:focus {
+	border: 1px solid #8ea7e9; /* Example border color */
+	outline: none; /* Remove default focus outline */
+	box-shadow: 0 0 5px #8ea7e9; /* Example box shadow */
 }
 
 select {
@@ -1543,8 +1550,8 @@ span.cat-links a:not(:last-child):after {
 #secondary .widget_block button[type="submit"]:hover,
 #secondary .widget_block button[type="submit"]:focus {
 	color: #fff;
-	background-color: #df2935;
-	border-color: #df2935;
+	background-color: #7b99e5 !important;
+	border-color: #7b99e5;
 }
 #wp-custom-header {
 	text-align: center;
