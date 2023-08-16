@@ -591,6 +591,14 @@ a:hover,
 a:focus,
 a:active {
 	color: #7b99e5;
+	/* outline: thin dotted; */
+}
+
+.site-header a:hover,
+.site-header a:focus,
+.site-header a:active {
+	color: #f8e8ee !important;
+	/* outline: thin dotted; */
 }
 
 a:focus {

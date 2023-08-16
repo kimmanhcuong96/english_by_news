@@ -1964,8 +1964,11 @@ function get_adjacent_post( $in_same_term = false, $excluded_terms = '', $previo
 	 * @param string       $taxonomy       Taxonomy. Used to identify the term used when `$in_same_term` is true.
 	 * @param WP_Post      $post           WP_Post object.
 	 */
-	$where = apply_filters( "get_{$adjacent}_post_where", $wpdb->prepare( "WHERE p.post_date $op %s AND p.post_type = %s $where", $current_post_date, $post->post_type ), $in_same_term, $excluded_terms, $taxonomy, $post );
-
+	// just find post with link of level 1
+	$search_string = '-level-1';
+	$where = apply_filters( "get_{$adjacent}_post_where", $wpdb->prepare( "WHERE p.post_date $op %s AND p.post_type = %s $where AND p.post_link LIKE %s", $current_post_date, $post->post_type,  '%' . $search_string . '%' ), $in_same_term, $excluded_terms, $taxonomy, $post );
+	// $where = apply_filters( "get_{$adjacent}_post_where", $wpdb->prepare( "WHERE p.post_date $op %s AND p.post_type = %s $where", $current_post_date, $post->post_type ), $in_same_term, $excluded_terms, $taxonomy, $post );
+echo $where;
 	/**
 	 * Filters the ORDER BY clause in the SQL for an adjacent post query.
 	 *
@@ -2322,6 +2325,7 @@ function get_adjacent_post_link( $format, $link, $in_same_term = false, $exclude
 		$post = get_post( get_post()->post_parent );
 	} else {
 		$post = get_adjacent_post( $in_same_term, $excluded_terms, $previous, $taxonomy );
+		echo $previous;
 	}
 
 	if ( ! $post ) {
@@ -2369,6 +2373,7 @@ function get_adjacent_post_link( $format, $link, $in_same_term = false, $exclude
 	 * @param WP_Post|string $post     The adjacent post. Empty string if no corresponding post exists.
 	 * @param string         $adjacent Whether the post is previous or next.
 	 */
+	// print_r($post);
 	return apply_filters( "{$adjacent}_post_link", $output, $format, $link, $post, $adjacent );
 }
 
@@ -2767,7 +2772,8 @@ function get_the_post_navigation( $args = array() ) {
 	if ( ! empty( $args['screen_reader_text'] ) && empty( $args['aria_label'] ) ) {
 		$args['aria_label'] = $args['screen_reader_text'];
 	}
-
+	// echo $args['next_text'];
+	// print_r($args);
 	$args = wp_parse_args(
 		$args,
 		array(
@@ -2817,6 +2823,7 @@ function get_the_post_navigation( $args = array() ) {
  *                    Default empty array.
  */
 function the_post_navigation( $args = array() ) {
+	// print_r($args);
 	echo get_the_post_navigation( $args );
 }
 
