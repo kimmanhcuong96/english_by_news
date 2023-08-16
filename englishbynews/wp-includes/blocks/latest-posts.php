@@ -35,7 +35,6 @@ function block_core_latest_posts_get_excerpt_length() {
  */
 function render_block_core_latest_posts( $attributes ) {
 	global $post, $block_core_latest_posts_excerpt_length;
-
 	$args = array(
 		'posts_per_page'      => $attributes['postsToShow'],
 		'post_status'         => 'publish',
@@ -169,7 +168,6 @@ function render_block_core_latest_posts( $attributes ) {
 			if ( post_password_required( $post ) ) {
 				$post_content = __( 'This content is password protected.' );
 			}
-
 			$list_items_markup .= sprintf(
 				'<div class="wp-block-latest-posts__post-full-content">%1$s</div>',
 				wp_kses_post( $post_content )
@@ -199,7 +197,7 @@ function render_block_core_latest_posts( $attributes ) {
 	}
 
 	$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => implode( ' ', $classes ) ) );
-
+  echo 'here dcmmm';
 	return sprintf(
 		'<ul %1$s>%2$s</ul>',
 		$wrapper_attributes,

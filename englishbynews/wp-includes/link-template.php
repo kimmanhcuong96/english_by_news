@@ -1965,8 +1965,13 @@ function get_adjacent_post( $in_same_term = false, $excluded_terms = '', $previo
 	 * @param WP_Post      $post           WP_Post object.
 	 */
 	// just find post with link of level 1
-	$search_string = '-level-1';
-	$where = apply_filters( "get_{$adjacent}_post_where", $wpdb->prepare( "WHERE p.post_date $op %s AND p.post_type = %s $where AND p.post_name LIKE %s", $current_post_date, $post->post_type,  '%' . $search_string . '%' ), $in_same_term, $excluded_terms, $taxonomy, $post );
+	$LEVEL1_TITLE_PART = '-level-1';
+	$LEVEL2_TITLE_PART = '-level-2';
+	$LEVEL3_TITLE_PART = '-level-3';
+	$base_post_name = str_replace("$LEVEL1_TITLE_PART", "", $post->post_name);
+	$base_post_name = str_replace("$LEVEL2_TITLE_PART", "", $base_post_name);
+	$base_post_name = str_replace("$LEVEL3_TITLE_PART", "", $base_post_name);
+	$where = apply_filters( "get_{$adjacent}_post_where", $wpdb->prepare( "WHERE p.post_date $op %s AND p.post_type = %s $where AND p.post_name LIKE %s AND p.post_name NOT LIKE %s", $current_post_date, $post->post_type,  '%' . $LEVEL1_TITLE_PART . '%', '%' . $base_post_name . '%' ), $in_same_term, $excluded_terms, $taxonomy, $post );
 	// $where = apply_filters( "get_{$adjacent}_post_where", $wpdb->prepare( "WHERE p.post_date $op %s AND p.post_type = %s $where", $current_post_date, $post->post_type ), $in_same_term, $excluded_terms, $taxonomy, $post );
 	/**
 	 * Filters the ORDER BY clause in the SQL for an adjacent post query.
