@@ -627,8 +627,8 @@ input[type="button"]:hover,
 input[type="reset"]:hover,
 input[type="submit"]:hover {
 	color: #fff;
-	background-color: #B1AFFF;
-	border-color: #B1AFFF;
+	background-color: #b1afff;
+	border-color: #b1afff;
 	text-decoration: none;
 	cursor: pointer;
 }
@@ -1275,7 +1275,7 @@ span.posted-on a {
 .reply a:hover,
 .reply a:focus {
 	color: #fff;
-	background-color: #B1AFFF;
+	background-color: #b1afff;
 }
 
 /*--------------------------------------------------------------
@@ -1505,7 +1505,7 @@ button.dropdown-toggle.active .fa:before {
 .cat-links a:focus,
 .entry-meta a:hover,
 .entry-meta a:focus {
-	color: #8EA7E9;
+	color: #8ea7e9;
 }
 span.cat-links a:not(:last-child):after {
 	content: "/";
@@ -2125,7 +2125,7 @@ nav.navigation.pagination {
 }
 
 .list-level a.button-level-3 {
-	background-color: #A5BAED !important;
+	background-color: #a5baed !important;
 }
 
 .list-level a.button-level-1:hover {
@@ -2149,4 +2149,8 @@ nav.navigation.pagination {
 		padding-left: 15px;
 		padding-right: 15px;
 	}
+}
+
+.comment-list .children {
+	margin-top: 12px !important;
 }

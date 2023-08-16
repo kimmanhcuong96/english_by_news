@@ -15,7 +15,7 @@
  * the visitor has not yet entered the password we will
  * return early without loading the comments.
  */
-if ( post_password_required() ) {
+if (post_password_required()) {
 	return;
 }
 ?>
@@ -24,27 +24,27 @@ if ( post_password_required() ) {
 
 	<?php
 	// You can start editing here -- including this comment!
-	if ( have_comments() ) :
+	if (have_comments()):
 		?>
-		<h2 class="comments-title">
+		<h3 class="comments-title">
 			<?php
 			$looks_blog_comment_count = get_comments_number();
-			if ( '1' === $looks_blog_comment_count ) {
+			if ('1' === $looks_blog_comment_count) {
 				printf(
 					/* translators: 1: title. */
-					esc_html__( 'One thought on &ldquo;%1$s&rdquo;', 'looks-blog' ),
-					'<span>' . wp_kses_post( get_the_title() ) . '</span>'
+					esc_html__('One comment on %1$s', 'looks-blog'),
+					'<span>' . wp_kses_post("News") . '</span>'
 				);
 			} else {
-				printf( 
+				printf(
 					/* translators: 1: comment count number, 2: title. */
-					esc_html( _nx( '%1$s thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', $looks_blog_comment_count, 'comments title', 'looks-blog' ) ),
-					number_format_i18n( $looks_blog_comment_count ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					'<span>' . wp_kses_post( get_the_title() ) . '</span>'
+					esc_html(_nx('%1$s thought on %2$s', '%1$s comments on %2$s', $looks_blog_comment_count, 'comments title', 'looks-blog')),
+					number_format_i18n($looks_blog_comment_count), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					'<span>' . wp_kses_post("News") . '</span>'
 				);
 			}
 			?>
-		</h2><!-- .comments-title -->
+		</h3><!-- .comments-title -->
 
 		<?php the_comments_navigation(); ?>
 
@@ -52,7 +52,7 @@ if ( post_password_required() ) {
 			<?php
 			wp_list_comments(
 				array(
-					'style'      => 'ol',
+					'style' => 'ol',
 					'short_ping' => true,
 				)
 			);
@@ -63,14 +63,16 @@ if ( post_password_required() ) {
 		the_comments_navigation();
 
 		// If comments are closed and there are comments, let's leave a little note, shall we?
-		if ( ! comments_open() ) :
+		if (!comments_open()):
 			?>
-			<p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'looks-blog' ); ?></p>
+			<p class="no-comments">
+				<?php esc_html_e('Comments are closed.', 'looks-blog'); ?>
+			</p>
 			<?php
 		endif;
 
 	endif; // Check for have_comments().
-
+	
 	comment_form();
 	?>
 
