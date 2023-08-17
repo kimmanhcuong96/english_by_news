@@ -1128,14 +1128,24 @@ nav.navigation.post-navigation a:focus {
 .entry-meta a,
 span.cat-links a {
 	text-decoration: none;
+	color: #383e4a;
+	/* color: #7286d3; */
+}
+
+.entry-title a:hover,
+.entry-meta a:hover,
+span.cat-links a:hover {
+	text-decoration: none;
+	/* color: #7568d2; */
+	color: #7286d3;
 }
 .entry-title {
 	margin: 0 0 10px;
 	text-transform: capitalize;
-	font-size: 24px;
+	font-size: 22px;
 	letter-spacing: 0;
 	line-height: 30px;
-	font-weight: 400;
+	font-weight: 500;
 }
 .widget-title {
 	font-size: 24px;
@@ -1152,7 +1162,7 @@ span.cat-links a {
 	font-size: 24px;
 	font-weight: 600;
 	margin-bottom: 20px;
-	color: #000;
+	color: #383e4a;
 	letter-spacing: 0.01em;
 }
 .block-gap {
