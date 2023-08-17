@@ -21,9 +21,10 @@ $block_core_latest_posts_excerpt_length = 0;
  * @return int Returns the global $block_core_latest_posts_excerpt_length variable
  *             to allow the excerpt_length filter respect the Latest Block setting.
  */
-function block_core_latest_posts_get_excerpt_length() {
-	global $block_core_latest_posts_excerpt_length;
-	return $block_core_latest_posts_excerpt_length;
+function block_core_latest_posts_get_excerpt_length()
+{
+  global $block_core_latest_posts_excerpt_length;
+  return $block_core_latest_posts_excerpt_length;
 }
 
 /**
@@ -33,190 +34,208 @@ function block_core_latest_posts_get_excerpt_length() {
  *
  * @return string Returns the post content with latest posts added.
  */
-function render_block_core_latest_posts( $attributes ) {
-	global $post, $block_core_latest_posts_excerpt_length;
-	$args = array(
-		'posts_per_page'      => $attributes['postsToShow'],
-		'post_status'         => 'publish',
-		'order'               => $attributes['order'],
-		'orderby'             => $attributes['orderBy'],
-		'ignore_sticky_posts' => true,
-		'no_found_rows'       => true,
-	);
+function render_block_core_latest_posts($attributes)
+{
+  // fix number of post = 24
+  $attributes['postsToShow'] = 24;
+  $LEVEL2_URL_PART = '-level-2';
+  $LEVEL3_URL_PART = '-level-3';
 
-	$block_core_latest_posts_excerpt_length = $attributes['excerptLength'];
-	add_filter( 'excerpt_length', 'block_core_latest_posts_get_excerpt_length', 20 );
+  $LEVEL1_TITLE_PART = '- level 1';
 
-	$filter_latest_posts_excerpt_more = static function( $more ) use ( $attributes ) {
-		$use_excerpt = 'excerpt' === $attributes['displayPostContentRadio'];
-		/* translators: %1$s is a URL to a post, excerpt truncation character, default … */
-		return $use_excerpt ? sprintf( __( ' … <a href="%1$s" rel="noopener noreferrer">Read more</a>' ), esc_url( get_permalink() ) ) : $more;
-	};
+  global $post, $block_core_latest_posts_excerpt_length;
+  $args = array(
+    'posts_per_page' => $attributes['postsToShow'],
+    'post_status' => 'publish',
+    'order' => $attributes['order'],
+    'orderby' => $attributes['orderBy'],
+    'ignore_sticky_posts' => true,
+    'no_found_rows' => true,
+  );
 
-	add_filter( 'excerpt_more', $filter_latest_posts_excerpt_more );
+  $block_core_latest_posts_excerpt_length = $attributes['excerptLength'];
+  add_filter('excerpt_length', 'block_core_latest_posts_get_excerpt_length', 20);
 
-	if ( isset( $attributes['categories'] ) ) {
-		$args['category__in'] = array_column( $attributes['categories'], 'id' );
-	}
-	if ( isset( $attributes['selectedAuthor'] ) ) {
-		$args['author'] = $attributes['selectedAuthor'];
-	}
+  $filter_latest_posts_excerpt_more = static function ($more) use ($attributes) {
+    $use_excerpt = 'excerpt' === $attributes['displayPostContentRadio'];
+    /* translators: %1$s is a URL to a post, excerpt truncation character, default … */
+    return $use_excerpt ? sprintf(__(' … <a href="%1$s" rel="noopener noreferrer">Read more</a>'), esc_url(get_permalink())) : $more;
+  };
 
-	$query        = new WP_Query();
-	$recent_posts = $query->query( $args );
+  add_filter('excerpt_more', $filter_latest_posts_excerpt_more);
 
-	if ( isset( $attributes['displayFeaturedImage'] ) && $attributes['displayFeaturedImage'] ) {
-		update_post_thumbnail_cache( $query );
-	}
+  if (isset($attributes['categories'])) {
+    $args['category__in'] = array_column($attributes['categories'], 'id');
+  }
+  if (isset($attributes['selectedAuthor'])) {
+    $args['author'] = $attributes['selectedAuthor'];
+  }
 
-	$list_items_markup = '';
+  $query = new WP_Query();
+  $recent_posts = $query->query($args);
 
-	foreach ( $recent_posts as $post ) {
-		$post_link = esc_url( get_permalink( $post ) );
-		$title     = get_the_title( $post );
+  if (isset($attributes['displayFeaturedImage']) && $attributes['displayFeaturedImage']) {
+    update_post_thumbnail_cache($query);
+  }
 
-		if ( ! $title ) {
-			$title = __( '(no title)' );
-		}
+  $list_items_markup = '';
 
-		$list_items_markup .= '<li>';
+  foreach ($recent_posts as $post) {
+    $post_link = esc_url(get_permalink($post));
+    // not get post have title level 2 or level 3
+    if (strpos($post_link, $LEVEL2_URL_PART) || strpos($post_link, $LEVEL3_URL_PART)) {
+      continue;
+    }
+    $title = get_the_title($post);
+    $post_id = get_the_ID();
+    $raw_title = get_post_field('post_title', $post_id);
+    $title = str_replace("$LEVEL1_TITLE_PART", "", $raw_title);
+    if (!$title) {
+      $title = __('(no title)');
+    }
 
-		if ( $attributes['displayFeaturedImage'] && has_post_thumbnail( $post ) ) {
-			$image_style = '';
-			if ( isset( $attributes['featuredImageSizeWidth'] ) ) {
-				$image_style .= sprintf( 'max-width:%spx;', $attributes['featuredImageSizeWidth'] );
-			}
-			if ( isset( $attributes['featuredImageSizeHeight'] ) ) {
-				$image_style .= sprintf( 'max-height:%spx;', $attributes['featuredImageSizeHeight'] );
-			}
+    $list_items_markup .= '<li>';
 
-			$image_classes = 'wp-block-latest-posts__featured-image';
-			if ( isset( $attributes['featuredImageAlign'] ) ) {
-				$image_classes .= ' align' . $attributes['featuredImageAlign'];
-			}
+    if ($attributes['displayFeaturedImage'] && has_post_thumbnail($post)) {
+      $image_style = '';
+      if (isset($attributes['featuredImageSizeWidth'])) {
+        $image_style .= sprintf('max-width:%spx;', $attributes['featuredImageSizeWidth']);
+      }
+      if (isset($attributes['featuredImageSizeHeight'])) {
+        $image_style .= sprintf('max-height:%spx;', $attributes['featuredImageSizeHeight']);
+      }
 
-			$featured_image = get_the_post_thumbnail(
-				$post,
-				$attributes['featuredImageSizeSlug'],
-				array(
-					'style' => esc_attr( $image_style ),
-				)
-			);
-			if ( $attributes['addLinkToFeaturedImage'] ) {
-				$featured_image = sprintf(
-					'<a href="%1$s" aria-label="%2$s">%3$s</a>',
-					esc_url( $post_link ),
-					esc_attr( $title ),
-					$featured_image
-				);
-			}
-			$list_items_markup .= sprintf(
-				'<div class="%1$s">%2$s</div>',
-				esc_attr( $image_classes ),
-				$featured_image
-			);
-		}
+      $image_classes = 'wp-block-latest-posts__featured-image';
+      if (isset($attributes['featuredImageAlign'])) {
+        $image_classes .= ' align' . $attributes['featuredImageAlign'];
+      }
 
-		$list_items_markup .= sprintf(
-			'<a class="wp-block-latest-posts__post-title" href="%1$s">%2$s</a>',
-			esc_url( $post_link ),
-			$title
-		);
+      $featured_image = get_the_post_thumbnail(
+        $post,
+        $attributes['featuredImageSizeSlug'],
+        array(
+          'style' => esc_attr($image_style),
+        )
+      );
+      if ($attributes['addLinkToFeaturedImage']) {
+        $featured_image = sprintf(
+          '<a href="%1$s" aria-label="%2$s">%3$s</a>',
+          esc_url($post_link),
+          esc_attr($title),
+          $featured_image
+        );
+      }
+      $list_items_markup .= sprintf(
+        '<div class="%1$s">%2$s</div>',
+        esc_attr($image_classes),
+        $featured_image
+      );
+    }
 
-		if ( isset( $attributes['displayAuthor'] ) && $attributes['displayAuthor'] ) {
-			$author_display_name = get_the_author_meta( 'display_name', $post->post_author );
+    $list_items_markup .= sprintf(
+      '<a class="wp-block-latest-posts__post-title" href="%1$s">%2$s</a>',
+      esc_url($post_link),
+      $title
+    );
 
-			/* translators: byline. %s: current author. */
-			$byline = sprintf( __( 'by %s' ), $author_display_name );
+    if (isset($attributes['displayAuthor']) && $attributes['displayAuthor']) {
+      $author_display_name = get_the_author_meta('display_name', $post->post_author);
 
-			if ( ! empty( $author_display_name ) ) {
-				$list_items_markup .= sprintf(
-					'<div class="wp-block-latest-posts__post-author">%1$s</div>',
-					$byline
-				);
-			}
-		}
+      /* translators: byline. %s: current author. */
+      $byline = sprintf(__('by %s'), $author_display_name);
 
-		if ( isset( $attributes['displayPostDate'] ) && $attributes['displayPostDate'] ) {
-			$list_items_markup .= sprintf(
-				'<time datetime="%1$s" class="wp-block-latest-posts__post-date">%2$s</time>',
-				esc_attr( get_the_date( 'c', $post ) ),
-				get_the_date( '', $post )
-			);
-		}
+      if (!empty($author_display_name)) {
+        $list_items_markup .= sprintf(
+          '<div class="wp-block-latest-posts__post-author">%1$s</div>',
+          $byline
+        );
+      }
+    }
 
-		if ( isset( $attributes['displayPostContent'] ) && $attributes['displayPostContent']
-			&& isset( $attributes['displayPostContentRadio'] ) && 'excerpt' === $attributes['displayPostContentRadio'] ) {
+    if (isset($attributes['displayPostDate']) && $attributes['displayPostDate']) {
+      $list_items_markup .= sprintf(
+        '<time datetime="%1$s" class="wp-block-latest-posts__post-date">%2$s</time>',
+        esc_attr(get_the_date('c', $post)),
+        get_the_date('', $post)
+      );
+    }
 
-			$trimmed_excerpt = get_the_excerpt( $post );
+    if (
+      isset($attributes['displayPostContent']) && $attributes['displayPostContent']
+      && isset($attributes['displayPostContentRadio']) && 'excerpt' === $attributes['displayPostContentRadio']
+    ) {
 
-			if ( post_password_required( $post ) ) {
-				$trimmed_excerpt = __( 'This content is password protected.' );
-			}
+      $trimmed_excerpt = get_the_excerpt($post);
 
-			$list_items_markup .= sprintf(
-				'<div class="wp-block-latest-posts__post-excerpt">%1$s</div>',
-				$trimmed_excerpt
-			);
-		}
+      if (post_password_required($post)) {
+        $trimmed_excerpt = __('This content is password protected.');
+      }
 
-		if ( isset( $attributes['displayPostContent'] ) && $attributes['displayPostContent']
-			&& isset( $attributes['displayPostContentRadio'] ) && 'full_post' === $attributes['displayPostContentRadio'] ) {
+      $list_items_markup .= sprintf(
+        '<div class="wp-block-latest-posts__post-excerpt">%1$s</div>',
+        $trimmed_excerpt
+      );
+    }
 
-			$post_content = html_entity_decode( $post->post_content, ENT_QUOTES, get_option( 'blog_charset' ) );
+    if (
+      isset($attributes['displayPostContent']) && $attributes['displayPostContent']
+      && isset($attributes['displayPostContentRadio']) && 'full_post' === $attributes['displayPostContentRadio']
+    ) {
 
-			if ( post_password_required( $post ) ) {
-				$post_content = __( 'This content is password protected.' );
-			}
-			$list_items_markup .= sprintf(
-				'<div class="wp-block-latest-posts__post-full-content">%1$s</div>',
-				wp_kses_post( $post_content )
-			);
-		}
+      $post_content = html_entity_decode($post->post_content, ENT_QUOTES, get_option('blog_charset'));
 
-		$list_items_markup .= "</li>\n";
-	}
+      if (post_password_required($post)) {
+        $post_content = __('This content is password protected.');
+      }
+      $list_items_markup .= sprintf(
+        '<div class="wp-block-latest-posts__post-full-content">%1$s</div>',
+        wp_kses_post($post_content)
+      );
+    }
 
-	remove_filter( 'excerpt_length', 'block_core_latest_posts_get_excerpt_length', 20 );
+    $list_items_markup .= "</li>\n";
+  }
 
-	$classes = array( 'wp-block-latest-posts__list' );
-	if ( isset( $attributes['postLayout'] ) && 'grid' === $attributes['postLayout'] ) {
-		$classes[] = 'is-grid';
-	}
-	if ( isset( $attributes['columns'] ) && 'grid' === $attributes['postLayout'] ) {
-		$classes[] = 'columns-' . $attributes['columns'];
-	}
-	if ( isset( $attributes['displayPostDate'] ) && $attributes['displayPostDate'] ) {
-		$classes[] = 'has-dates';
-	}
-	if ( isset( $attributes['displayAuthor'] ) && $attributes['displayAuthor'] ) {
-		$classes[] = 'has-author';
-	}
-	if ( isset( $attributes['style']['elements']['link']['color']['text'] ) ) {
-		$classes[] = 'has-link-color';
-	}
+  remove_filter('excerpt_length', 'block_core_latest_posts_get_excerpt_length', 20);
 
-	$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => implode( ' ', $classes ) ) );
-  echo 'here dcmmm';
-	return sprintf(
-		'<ul %1$s>%2$s</ul>',
-		$wrapper_attributes,
-		$list_items_markup
-	);
+  $classes = array('wp-block-latest-posts__list');
+  if (isset($attributes['postLayout']) && 'grid' === $attributes['postLayout']) {
+    $classes[] = 'is-grid';
+  }
+  if (isset($attributes['columns']) && 'grid' === $attributes['postLayout']) {
+    $classes[] = 'columns-' . $attributes['columns'];
+  }
+  if (isset($attributes['displayPostDate']) && $attributes['displayPostDate']) {
+    $classes[] = 'has-dates';
+  }
+  if (isset($attributes['displayAuthor']) && $attributes['displayAuthor']) {
+    $classes[] = 'has-author';
+  }
+  if (isset($attributes['style']['elements']['link']['color']['text'])) {
+    $classes[] = 'has-link-color';
+  }
+
+  $wrapper_attributes = get_block_wrapper_attributes(array('class' => implode(' ', $classes)));
+  return sprintf(
+    '<ul %1$s>%2$s</ul>',
+    $wrapper_attributes,
+    $list_items_markup
+  );
 }
 
 /**
  * Registers the `core/latest-posts` block on server.
  */
-function register_block_core_latest_posts() {
-	register_block_type_from_metadata(
-		__DIR__ . '/latest-posts',
-		array(
-			'render_callback' => 'render_block_core_latest_posts',
-		)
-	);
+function register_block_core_latest_posts()
+{
+  register_block_type_from_metadata(
+    __DIR__ . '/latest-posts',
+    array(
+      'render_callback' => 'render_block_core_latest_posts',
+    )
+  );
 }
-add_action( 'init', 'register_block_core_latest_posts' );
+add_action('init', 'register_block_core_latest_posts');
 
 /**
  * Handles outdated versions of the `core/latest-posts` block by converting
@@ -234,17 +253,18 @@ add_action( 'init', 'register_block_core_latest_posts' );
  *
  * @return array The migrated block object.
  */
-function block_core_latest_posts_migrate_categories( $block ) {
-	if (
-		'core/latest-posts' === $block['blockName'] &&
-		! empty( $block['attrs']['categories'] ) &&
-		is_string( $block['attrs']['categories'] )
-	) {
-		$block['attrs']['categories'] = array(
-			array( 'id' => absint( $block['attrs']['categories'] ) ),
-		);
-	}
+function block_core_latest_posts_migrate_categories($block)
+{
+  if (
+    'core/latest-posts' === $block['blockName'] &&
+    !empty($block['attrs']['categories']) &&
+    is_string($block['attrs']['categories'])
+  ) {
+    $block['attrs']['categories'] = array(
+      array('id' => absint($block['attrs']['categories'])),
+    );
+  }
 
-	return $block;
+  return $block;
 }
-add_filter( 'render_block_data', 'block_core_latest_posts_migrate_categories' );
+add_filter('render_block_data', 'block_core_latest_posts_migrate_categories');
