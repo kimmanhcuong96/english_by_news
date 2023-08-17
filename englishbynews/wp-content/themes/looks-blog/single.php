@@ -29,7 +29,7 @@ get_header();
 				endif;
 			endwhile; // End of the loop.
 			?>
-
+			<?php get_template_part('template-parts/recommend'); ?>
 		</main><!-- #main -->
 		<?php get_sidebar(); ?>
 	</div>

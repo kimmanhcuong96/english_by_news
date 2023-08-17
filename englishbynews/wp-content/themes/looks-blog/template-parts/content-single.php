@@ -22,7 +22,7 @@ $LEVEL3_TITLE_PART = '- level 3';
 		<div class="entry-container">
 			<header class="entry-header">
 				<footer class="entry-footer">
-					<?php looks_blog_entry_footer(); ?>
+					<?php looks_blog_entry_footer(true); ?>
 				</footer><!-- .entry-footer -->
 
 				<?php

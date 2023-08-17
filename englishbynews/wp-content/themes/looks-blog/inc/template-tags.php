@@ -58,7 +58,7 @@ if (!function_exists('looks_blog_entry_footer')):
 	/**
 	 * Prints HTML with meta information for the categories, tags and comments.
 	 */
-	function looks_blog_entry_footer()
+	function looks_blog_entry_footer($isShowSelectLevel = false)
 	{
 		// Hide category and tag text for pages.
 		// if ( 'post' === get_post_type() ) {
@@ -119,8 +119,17 @@ if (!function_exists('looks_blog_entry_footer')):
 		$post_link = get_permalink($post_id); // Lấy liên kết của bài viết
 		$base_post_link = str_replace($LEVEL3_URL_PART, '', str_replace($LEVEL2_URL_PART, '', str_replace($LEVEL1_URL_PART, '', $post_link)));
 		// echo $post_link; // Hiển thị liên kết của bài viết
-
-		echo '<div class="list-level">  <a href="' . substr($base_post_link, 0, -1) . $LEVEL1_URL_PART . '" class="button-level-1">Level 1</a>' . '<a href="' . substr($base_post_link, 0, -1) . $LEVEL2_URL_PART . '" class="button-level-2">Level 2</a>' . '<a href="' . substr($base_post_link, 0, -1) . $LEVEL3_URL_PART . '" class="button-level-3">Level 3</a>' . '</div>';
+		if ($isShowSelectLevel) {
+			if (stripos($post_link, $LEVEL1_URL_PART)) {
+				echo '<div class="list-level">  <a href="' . substr($base_post_link, 0, -1) . $LEVEL1_URL_PART . '" class="button-level-1 selected-level">Level 1</a>' . '<a href="' . substr($base_post_link, 0, -1) . $LEVEL2_URL_PART . '" class="button-level-2">Level 2</a>' . '<a href="' . substr($base_post_link, 0, -1) . $LEVEL3_URL_PART . '" class="button-level-3">Level 3</a>' . '</div>';
+			} else if (stripos($post_link, $LEVEL2_URL_PART)) {
+				echo '<div class="list-level">  <a href="' . substr($base_post_link, 0, -1) . $LEVEL1_URL_PART . '" class="button-level-1">Level 1</a>' . '<a href="' . substr($base_post_link, 0, -1) . $LEVEL2_URL_PART . '" class="button-level-2 selected-level">Level 2</a>' . '<a href="' . substr($base_post_link, 0, -1) . $LEVEL3_URL_PART . '" class="button-level-3">Level 3</a>' . '</div>';
+			} else {
+				echo '<div class="list-level">  <a href="' . substr($base_post_link, 0, -1) . $LEVEL1_URL_PART . '" class="button-level-1">Level 1</a>' . '<a href="' . substr($base_post_link, 0, -1) . $LEVEL2_URL_PART . '" class="button-level-2">Level 2</a>' . '<a href="' . substr($base_post_link, 0, -1) . $LEVEL3_URL_PART . '" class="button-level-3 selected-level">Level 3</a>' . '</div>';
+			}
+		} else {
+			echo '<div class="list-level">  <a href="' . substr($base_post_link, 0, -1) . $LEVEL1_URL_PART . '" class="button-level-1">Level 1</a>' . '<a href="' . substr($base_post_link, 0, -1) . $LEVEL2_URL_PART . '" class="button-level-2">Level 2</a>' . '<a href="' . substr($base_post_link, 0, -1) . $LEVEL3_URL_PART . '" class="button-level-3">Level 3</a>' . '</div>';
+		}
 	}
 endif;
 
