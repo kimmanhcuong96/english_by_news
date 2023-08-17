@@ -1688,7 +1688,7 @@ nav.navigation.pagination {
 .pagination .page-numbers:hover,
 .pagination .page-numbers:focus {
 	color: #fff;
-	background-color: #df2935;
+	background-color: #7286d3;
 }
 .archive-blog article:before,
 .archive-blog article:after {
@@ -2181,4 +2181,16 @@ nav.navigation.pagination {
 #comments {
 	background-color: #fff2f2 !important;
 	padding: 15px;
+}
+
+.search-results .nav-previous,
+.search-results .nav-next {
+	text-align: center;
+	font-size: 1.5em;
+	margin-top: 15px;
+}
+
+.search-results .nav-previous a,
+.search-results .nav-next a {
+	color: #7286d3 !important;
 }
