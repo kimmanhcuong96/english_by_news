@@ -60,18 +60,22 @@ if (
 	</div>
 	<div class="site-info">
 		<div class="container">
-			<?php
-			/* translators: %s: CMS name, i.e. WordPress. */
-			printf(esc_html__('Proudly powered by %s', 'looks-blog'), 'EnglishByNews');
-			?>
+			<a href="<?php echo home_url() ?>">
+				<?php
+				/* translators: %s: CMS name, i.e. WordPress. */
+				printf(esc_html__('Proudly powered by %s', 'looks-blog'), 'EnglishByNews');
+				?>
+			</a>
 			<span class="sep"> | </span>
 			<?php
 			/* translators: 1: Theme name, 2: Theme author. */
 			// printf(esc_html__('Theme: %1$s by %2$s.', 'looks-blog'), 'Looks Blog', 'Crimson Themes');
 			?>
-			<?php
-			printf(esc_html__('About us', 'looks-blog'), 'Looks Blog', 'Crimson Themes');
-			?>
+			<a href="about-us">
+				<?php
+				printf(esc_html__('About us', 'looks-blog'), 'Looks Blog', 'Crimson Themes');
+				?>
+			</a>
 		</div>
 	</div><!-- .site-info -->
 </footer><!-- #colophon -->

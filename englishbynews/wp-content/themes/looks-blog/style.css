@@ -598,7 +598,10 @@ a:active {
 
 .site-header a:hover,
 .site-header a:focus,
-.site-header a:active {
+.site-header a:active,
+.site-footer a:hover,
+.site-footerr a:focus,
+.site-footer a:active {
     color: #f8e8ee !important;
     /* outline: thin dotted; */
 }
