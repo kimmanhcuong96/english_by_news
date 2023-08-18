@@ -25,8 +25,10 @@
 				</div>
 				<div class="method-content">
 					<h4>Reading</h4>
-					<p>Read a pair of news articles daily.</p>
-					<p>Review the news articles from the previous day and assess your recall of unfamiliar vocabulary.
+					<p>Read a pair of <a style="text-decoration: unset;" href="<?php echo home_url() ?>">news
+							articles</a> daily.</p>
+					<p>Review the <a style="text-decoration: unset;" href="<?php echo home_url() ?>">news articles</a>
+						from the previous day and assess your recall of unfamiliar vocabulary.
 					</p>
 				</div>
 			</div>
@@ -38,8 +40,10 @@
 				</div>
 				<div class="method-content">
 					<h4>Listening</h4>
-					<p>Simultaneously listen to today's news while reading the corresponding text.</p>
-					<p>Focus on today's news by only listening, avoiding reading the text that comes with it.</p>
+					<p>Simultaneously listen to <a style="text-decoration: unset;"
+							href="<?php echo home_url() ?>">today's news</a> while reading the corresponding text.</p>
+					<p>Focus on <a style="text-decoration: unset;" href="<?php echo home_url() ?>">today's news</a> by
+						only listening, avoiding reading the text that comes with it.</p>
 				</div>
 			</div>
 
@@ -61,8 +65,8 @@
 				</div>
 				<div class="method-content">
 					<h4>Speaking</h4>
-					<p>Speak aloud the news articles like a narrator.</p>
-					<p>Discuss the content of the news articles with friends on a daily basis.</p>
+					<p>Speak aloud the <a style="text-decoration: unset;" href="<?php echo home_url() ?>">news articles</a> like a narrator.</p>
+					<p>Discuss the content of the <a style="text-decoration: unset;" href="<?php echo home_url() ?>">news articles</a> with friends on a daily basis.</p>
 				</div>
 			</div>
 		</div>
