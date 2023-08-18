@@ -63,7 +63,7 @@ if (
 			<a href="<?php echo home_url() ?>">
 				<?php
 				/* translators: %s: CMS name, i.e. WordPress. */
-				printf(esc_html__('Proudly powered by %s', 'looks-blog'), 'EnglishViaNews');
+				printf(esc_html__('Proudly powered by %s', 'looks-blog'), 'EnglishByLevels');
 				?>
 			</a>
 			<span class="sep"> | </span>
