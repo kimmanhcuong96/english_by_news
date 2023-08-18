@@ -11,7 +11,7 @@
 <article id="recommend-guide">
 	<div class="post-wrapper base-listen">
 		<div class="entry-container">
-			<title>How to Improve Your English with EnglishByNews</title>
+			<title>How to Improve Your English with EnglishViaNews</title>
 			<h3 style="text-align: center; font-weight: 600; color: #7286D3"> How to Improve Your English</h3>
 
 			<!-- <h2>Test</h2>
