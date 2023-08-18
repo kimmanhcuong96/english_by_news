@@ -20,7 +20,7 @@
 				to Level 3 if you know 2000-3000 words.</p> -->
 			<div class="method-to-improve">
 				<div class="icon-wrap">
-					<img src=<?php echo get_template_directory_uri() . '../assets/img/book.png'; ?> alt="" height="30"
+					<img src=<?php echo get_template_directory_uri() . '/assets/img/book.png'; ?> alt="" height="30"
 						width="30" />
 				</div>
 				<div class="method-content">
@@ -35,7 +35,7 @@
 
 			<div class="method-to-improve">
 				<div class="icon-wrap">
-					<img src=<?php echo get_template_directory_uri() . '../assets/img/headphone.png'; ?> alt=""
+					<img src=<?php echo get_template_directory_uri() . '/assets/img/headphone.png'; ?> alt=""
 						height="30" width="30" />
 				</div>
 				<div class="method-content">
@@ -49,7 +49,7 @@
 
 			<div class="method-to-improve">
 				<div class="icon-wrap">
-					<img src=<?php echo get_template_directory_uri() . '../assets/img/write.png'; ?> alt="" height="30"
+					<img src=<?php echo get_template_directory_uri() . '/assets/img/write.png'; ?> alt="" height="30"
 						width="30" />
 				</div>
 				<div class="method-content">
@@ -60,7 +60,7 @@
 
 			<div class="method-to-improve">
 				<div class="icon-wrap">
-					<img src=<?php echo get_template_directory_uri() . '../assets/img/speaking.png'; ?> alt=""
+					<img src=<?php echo get_template_directory_uri() . '/assets/img/speaking.png'; ?> alt=""
 						height="30" width="30" />
 				</div>
 				<div class="method-content">
