@@ -42,8 +42,8 @@
 		<header id="masthead" class="site-header">
 			<div class="container" style="display: flex; align-items: center">
 				<div class="site-branding" style="display: flex; min-width: 360px; align-items: center;">
-					<img src=<?php echo get_template_directory_uri() . '/assets/img/logo.png'; ?> alt="" height="75"
-						width="75" style="margin-right: 20px;" />
+					<a href="<?php echo esc_url(home_url('/')); ?>"><img src=<?php echo get_template_directory_uri() . '/assets/img/logo.png'; ?> alt="" height="75"
+						width="75" style="margin-right: 20px;" /></a>
 					<div>
 						<?php
 						// the_custom_logo();
