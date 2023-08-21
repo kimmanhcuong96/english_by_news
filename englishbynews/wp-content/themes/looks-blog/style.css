@@ -545,8 +545,8 @@ ol {
     list-style: decimal;
 }
 
-li>ul,
-li>ol {
+li > ul,
+li > ol {
     margin-bottom: 0;
     margin-left: 1.5em;
 }
@@ -757,8 +757,8 @@ ul li a {
     top: 0;
 }
 
-.main-navigation ul ul li:hover>ul,
-.main-navigation ul ul li.focus>ul {
+.main-navigation ul ul li:hover > ul,
+.main-navigation ul ul li.focus > ul {
     display: block;
     left: auto;
 }
@@ -767,8 +767,8 @@ ul li a {
     width: 200px;
 }
 
-.main-navigation ul li:hover>ul,
-.main-navigation ul li.focus>ul {
+.main-navigation ul li:hover > ul,
+.main-navigation ul li.focus > ul {
     left: auto;
 }
 
@@ -1241,13 +1241,13 @@ span.cat-links a:hover {
     color: #666;
 }
 
-.archive-blog .entry-meta>span,
-.single .entry-meta>span {
+.archive-blog .entry-meta > span,
+.single .entry-meta > span {
     position: relative;
 }
 
-.archive-blog .entry-meta>span.byline:after,
-.single .entry-meta>span.byline:after {
+.archive-blog .entry-meta > span.byline:after,
+.single .entry-meta > span.byline:after {
     content: "";
     background-color: #041527;
     content: "";
@@ -1434,13 +1434,13 @@ span.posted-on a {
     position: relative;
 }
 
-.main-navigation ul.nav-menu>li>a {
+.main-navigation ul.nav-menu > li > a {
     padding: 15px 18px;
 }
 
-.main-navigation ul.nav-menu>li:hover>a,
-.main-navigation ul.nav-menu>li>a:hover,
-.main-navigation ul.nav-menu>li>a:focus {
+.main-navigation ul.nav-menu > li:hover > a,
+.main-navigation ul.nav-menu > li > a:hover,
+.main-navigation ul.nav-menu > li > a:focus {
     color: #f4f4f4;
 }
 
@@ -1482,7 +1482,7 @@ span.posted-on a {
     width: 225px;
 }
 
-.main-navigation ul.nav-menu .current-menu-item>a {
+.main-navigation ul.nav-menu .current-menu-item > a {
     color: #ffdabc;
 }
 
@@ -1853,7 +1853,6 @@ nav.navigation.pagination {
 	Responsive
 --------------------------------------------------------------*/
 @media screen and (min-width: 567px) {
-
     .column-2,
     .column-3,
     .column-4,
@@ -2011,7 +2010,6 @@ nav.navigation.pagination {
 }
 
 @media screen and (min-width: 992px) {
-
     .column-4 article,
     .column-4 .widget-column {
         width: 25%;
@@ -2083,13 +2081,13 @@ nav.navigation.pagination {
         width: 70%;
     }
 
-    .main-navigation .menu-item-has-children>a:after {
+    .main-navigation .menu-item-has-children > a:after {
         content: "\f107";
         font-family: "FontAwesome";
         padding-left: 8px;
     }
 
-    .main-navigation ul ul .menu-item-has-children>a:after {
+    .main-navigation ul ul .menu-item-has-children > a:after {
         content: "\f105";
     }
 
@@ -2099,28 +2097,28 @@ nav.navigation.pagination {
         text-align: center;
     }
 
-    .main-navigation ul.nav-menu>li>a {
+    .main-navigation ul.nav-menu > li > a {
         color: white;
     }
 
-    .main-navigation ul li:hover>ul,
-    .main-navigation ul li.focus>ul {
+    .main-navigation ul li:hover > ul,
+    .main-navigation ul li.focus > ul {
         left: 0;
         right: auto;
     }
 
-    .main-navigation ul ul li:hover>ul {
+    .main-navigation ul ul li:hover > ul {
         left: 100%;
         right: auto;
     }
 
-    .main-navigation ul ul li:hover>a,
-    .main-navigation ul ul li.focus>a {
+    .main-navigation ul ul li:hover > a,
+    .main-navigation ul ul li.focus > a {
         background-color: #f3f3f3;
         color: #fff !important;
     }
 
-    .main-navigation ul.sub-menu>li:last-child>a {
+    .main-navigation ul.sub-menu > li:last-child > a {
         border-bottom: none;
     }
 
@@ -2128,7 +2126,7 @@ nav.navigation.pagination {
         border-bottom: 1px solid #eee;
     }
 
-    .main-navigation ul ul>li:last-child {
+    .main-navigation ul ul > li:last-child {
         border-bottom: none;
     }
 
@@ -2407,11 +2405,17 @@ nav.navigation.pagination {
 
 #recommend-guide .icon-wrap {
     max-width: 60px;
-	min-width: 60px;
-	margin-top: 15px;
-	text-align: center;
+    min-width: 60px;
+    margin-top: 15px;
+    text-align: center;
 }
 
 #recommend-guide .method-content {
     margin-left: 20px;
+}
+
+.widget_search button {
+    padding: 5px;
+    font-size: 14px;
+    text-transform: lowercase !important;
 }
