@@ -212,7 +212,7 @@ require get_template_directory() . '/inc/template-functions.php';
  */
 require get_template_directory() . '/inc/customizer.php';
 function add_favicon() {
-	echo '<link rel="shortcut icon" type="image/png" href="'.get_template_directory_uri().'/assets/img/favicon.png" />';
+	echo '<link rel="shortcut icon" type="image/png" href="'.get_template_directory_uri().'/assets/img/favicon.ico" />';
   }
    
   add_action('wp_head', 'add_favicon');
