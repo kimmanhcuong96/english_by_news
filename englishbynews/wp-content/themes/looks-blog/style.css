@@ -2419,3 +2419,7 @@ nav.navigation.pagination {
     font-size: 14px;
     text-transform: lowercase !important;
 }
+
+.widget_recent_entries ul {
+    padding: 20px 10px 20px 30px !important;
+}
